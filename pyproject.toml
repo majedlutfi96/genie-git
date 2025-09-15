@@ -1,5 +1,5 @@
 [project]
-name = "git-genie"
+name = "genie-git"
 version = "0.1.0"
 description = "An AI-powered tool to suggest conventional git commit messages."
 readme = "README.md"
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-git-genie = "git_genie.main:main"
+genie-git = "genie_git.main:main"
 
 # Ruff
 [tool.ruff]

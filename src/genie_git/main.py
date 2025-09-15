@@ -9,7 +9,7 @@ from .git_handler import get_log, get_repository_changes
 
 
 def handle_configure(args: Namespace) -> None:
-    """Configure git-genie."""
+    """Configure genie-git."""
     config = Config.load()
 
     if args.model:
@@ -61,7 +61,7 @@ def handle_suggest(_args: Namespace) -> None:
 def main() -> None:
     """Parse command-line arguments and execute the corresponding function."""
     parser = ArgumentParser(
-        "git-genie",
+        "genie-git",
         description="An AI-powered tool to suggest conventional git commit messages.",
     )
 

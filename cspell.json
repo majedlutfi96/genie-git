@@ -18,6 +18,7 @@
     "pydocstyle",
     "pyupgrade",
     "genai",
-    "gitpython"
+    "gitpython",
+    "genie-git"
   ]
 }

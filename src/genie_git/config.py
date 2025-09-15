@@ -4,13 +4,13 @@ import json
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-CONFIG_DIR = Path.home() / ".git-genie"
+CONFIG_DIR = Path.home() / ".genie-git"
 CONFIG_FILE = CONFIG_DIR / "config.json"
 
 
 @dataclass
 class Config:
-    """Represent the configurations for the git-genie tool."""
+    """Represent the configurations for the genie-git tool."""
 
     model: str = "gemini-2.5-flash"
     api_key: str = ""
