@@ -3,7 +3,9 @@
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
 
+from .ai_handler import suggest_commit_message
 from .config import Config
+from .git_handler import get_log, get_repository_changes
 
 
 def handle_configure(args: Namespace) -> None:
@@ -36,9 +38,24 @@ def handle_exclude_files(args: Namespace) -> None:
     config.save()
 
 
-def handle_suggest(args: Namespace) -> None:
+def handle_suggest(_args: Namespace) -> None:
     """Suggests a commit message based on the changes in the repository."""
-    raise NotImplementedError("handle_suggest is not implemented yet.")
+    config = Config.load()
+    staged_changes = get_repository_changes(config.exclude_files)
+
+    if not staged_changes:
+        print("No staged changes found in the repository.")
+        return
+
+    git_logs = get_log(config.number_of_commits)
+
+    message = suggest_commit_message(
+        api_key=config.api_key,
+        git_logs=git_logs,
+        staged_changes=staged_changes,
+        message_specifications=config.message_specifications,
+    )
+    print(message)
 
 
 def main() -> None:
