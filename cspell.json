@@ -1,0 +1,23 @@
+{
+  "ignorePaths": [
+    "*.lock",
+    ".venv/",
+    "dist/",
+    "build/",
+    ".gitignore"
+  ],
+  "language": "en",
+  "words": [
+    "Majed",
+    "Lutfi",
+    "venv",
+    "mypy",
+    "pycodestyle",
+    "pyflakes",
+    "isort",
+    "pydocstyle",
+    "pyupgrade",
+    "genai",
+    "gitpython"
+  ]
+}
