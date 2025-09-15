@@ -15,7 +15,7 @@ class Config:
     model: str = "gemini-2.5-flash"
     api_key: str = ""
     exclude_files: list[str] = field(default_factory=list)
-    message_specifications: str = ""
+    message_specifications: str = "concise and clear"
     number_of_commits: int = (
         5  # The number of commits to include in the AI prompt as a reference.
     )
