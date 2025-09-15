@@ -25,9 +25,6 @@ jobs:
       - name: Build package with uv
         run: uv build
 
-      - name: List files in the workspace
-        run: ls -R
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -48,8 +45,7 @@ jobs:
         with:
           name: python-package
 
-      - name: List files in the workspace
-        run: ls -R
-
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          package_dir: .
