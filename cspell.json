@@ -21,6 +21,7 @@
     "gitpython",
     "genie-git",
     "pypi",
-    "pypa"
+    "pypa",
+    "pyproject"
   ]
 }

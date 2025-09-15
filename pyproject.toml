@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Majed Lutfi", email = "majedelutfi@hotmail.com" }
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "gitpython>=3.1.45",
     "google-genai>=1.36.0",
