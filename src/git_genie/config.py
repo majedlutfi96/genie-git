@@ -1,0 +1,39 @@
+"""Configuration dataclass."""
+
+import json
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+
+CONFIG_DIR = Path.home() / ".git-genie"
+CONFIG_FILE = CONFIG_DIR / "config.json"
+
+
+@dataclass
+class Config:
+    """Represent the configurations for the git-genie tool."""
+
+    model: str = "gemini-2.5-flash"
+    api_key: str = ""
+    exclude_files: list[str] = field(default_factory=list)
+    message_specifications: str = ""
+
+    def save(self) -> None:
+        """Save the configurations to a JSON file."""
+        CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+
+        with open(CONFIG_FILE, "w") as f:
+            json.dump(asdict(self), f, indent=2)
+
+    @classmethod
+    def load(cls) -> "Config":
+        """Load the configurations from the config JSON file."""
+        if not CONFIG_FILE.exists():
+            return cls()
+
+        with open(CONFIG_FILE) as f:
+            data = json.load(f)
+            return cls(**data)
+
+    def show(self) -> None:
+        """Show the current configurations."""
+        print(json.dumps(asdict(self), indent=2))
