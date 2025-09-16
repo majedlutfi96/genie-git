@@ -22,6 +22,8 @@
     "genie-git",
     "pypi",
     "pypa",
-    "pyproject"
+    "pyproject",
+    "aistudio",
+    "apikey"
   ]
 }
