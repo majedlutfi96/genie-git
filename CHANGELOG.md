@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Initial release of `git-genie`.
+-   Initial release of `genie-git`.
 -   `suggest` command to generate commit messages from staged files.
 -   `configure` command to set API key and model.
 -   `exclude-files` command to ignore paths in the diff.
