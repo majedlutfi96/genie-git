@@ -1,6 +1,6 @@
 [project]
 name = "genie-git"
-version = "0.1.0"
+version = "0.1.1"
 description = "An AI-powered tool to suggest conventional git commit messages."
 readme = "README.md"
 authors = [
