@@ -24,6 +24,7 @@
     "pypa",
     "pyproject",
     "aistudio",
-    "apikey"
+    "apikey",
+    "pytest"
   ]
 }
