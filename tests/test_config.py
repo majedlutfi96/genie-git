@@ -8,7 +8,7 @@ from genie_git.config import Config
 
 
 def test_config_save_and_load(tmp_path: Path, mocker: MockerFixture) -> None:
-    """Tests that a config object can be saved and loaded."""
+    """Test that a config object can be saved and loaded."""
     config_file = tmp_path / "config.json"
 
     mocker.patch("genie_git.config.CONFIG_FILE", config_file)
@@ -37,7 +37,7 @@ def test_config_save_and_load(tmp_path: Path, mocker: MockerFixture) -> None:
 def test_config_load_without_existing_file(
     tmp_path: Path, mocker: MockerFixture
 ) -> None:
-    """Tests that Config.load() returns a default Config when file does not exist."""
+    """Test that Config.load() returns a default Config when file does not exist."""
     mocker.patch("genie_git.config.CONFIG_FILE", tmp_path / "no_config.json")
 
     loaded_config = Config.load()

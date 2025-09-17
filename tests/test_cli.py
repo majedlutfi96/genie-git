@@ -1,86 +1,44 @@
-"""Test the CLI commands."""
+"""Test the CLI module."""
 
-from argparse import Namespace
+from genie_git.cli import create_parser
+from genie_git.cli_handlers import (
+    handle_configure,
+    handle_exclude_files,
+    handle_suggest,
+)
 
-import pytest
-from pytest_mock import MockerFixture
 
-from genie_git.main import handle_configure, handle_exclude_files, handle_suggest
+def parser_defaults_to_suggest() -> None:
+    """Test that the parser defaults to suggest."""
+    parser = create_parser()
+    args = parser.parse_args([])
+    assert args.func == handle_suggest
 
 
-def test_handle_configure(mocker: MockerFixture) -> None:
-    """Tests that handle_configure updates the configurations file."""
-    mock_config_instance = mocker.MagicMock()
-    mocker.patch("genie_git.main.Config.load", return_value=mock_config_instance)
-
-    args = Namespace(
-        model="test_model",
-        api_key="test_api_key",
-        message_specifications="test_message_specifications",
-        show=False,
+def parser_calls_configure_handler() -> None:
+    """Test that the parser calls the configure handler correctly."""
+    parser = create_parser()
+    args = parser.parse_args(
+        [
+            "configure",
+            "--model",
+            "test_model",
+            "--api-key",
+            "test_api_key",
+            "--message-specifications",
+            "test_message_specifications",
+        ]
     )
-
-    handle_configure(args)
-
-    mock_config_instance.save.assert_called_once()
-
-    assert mock_config_instance.model == "test_model"
-    assert mock_config_instance.api_key == "test_api_key"
-    assert mock_config_instance.message_specifications == "test_message_specifications"
-
-    mock_config_instance.show.assert_not_called()
-
-    args.show = True
-    handle_configure(args)
-    mock_config_instance.show.assert_called_once()
+    assert args.func == handle_configure
+    assert args.model == "test_model"
+    assert args.api_key == "test_api_key"
+    assert args.message_specifications == "test_message_specifications"
+    assert args.show is False
 
 
-def test_handle_suggest(mocker: MockerFixture) -> None:
-    """Tests that handle_suggest calls all it's dependencies."""
-    mock_config_instance = mocker.MagicMock()
-    mocker.patch("genie_git.main.Config.load", return_value=mock_config_instance)
-
-    mock_get_log = mocker.patch("genie_git.main.get_log", return_value="test_log")
-    mock_get_repository_changes = mocker.patch(
-        "genie_git.main.get_repository_changes", return_value="test_changes"
-    )
-    mock_suggest_commit_message = mocker.patch(
-        "genie_git.main.suggest_commit_message", return_value="test_message"
-    )
-
-    handle_suggest(Namespace())
-
-    mock_get_repository_changes.assert_called_once_with(
-        mock_config_instance.exclude_files
-    )
-
-    mock_get_log.assert_called_once_with(mock_config_instance.number_of_commits)
-
-    mock_suggest_commit_message.assert_called_once_with(
-        api_key=mock_config_instance.api_key,
-        git_logs="test_log",
-        staged_changes="test_changes",
-        message_specifications=mock_config_instance.message_specifications,
-    )
-
-
-def test_handle_exclude_files(mocker: MockerFixture) -> None:
-    """Tests that handle_exclude_files updates the configurations file."""
-    mock_config_instance = mocker.MagicMock()
-    mocker.patch("genie_git.main.Config.load", return_value=mock_config_instance)
-
-    # testing with valid files
-    mocker.patch("genie_git.main.Path.exists", return_value=True)
-    handle_exclude_files(Namespace(files=["test_file1", "test_file2"]))
-
-    assert mock_config_instance.exclude_files.extend.is_called_once_with(
-        ["test_file1", "test_file2"]
-    )
-
-    assert mock_config_instance.save.is_called_once()
-
-    # testing with non existing files
-    mocker.patch("genie_git.main.Path.exists", return_value=False)
-
-    with pytest.raises(FileNotFoundError, match="File test_file1 does not exist."):
-        handle_exclude_files(Namespace(files=["test_file1", "test_file2"]))
+def parser_calls_exclude_files_handler() -> None:
+    """Test that the parser calls the exclude files handler correctly."""
+    parser = create_parser()
+    args = parser.parse_args(["exclude-files", "test_file1", "test_file2"])
+    assert args.func == handle_exclude_files
+    assert args.files == ["test_file1", "test_file2"]

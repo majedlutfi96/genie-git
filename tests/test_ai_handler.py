@@ -6,7 +6,7 @@ from genie_git.ai_handler import suggest_commit_message
 
 
 def test_generate_commit_message(mocker: MockerFixture) -> None:
-    """Tests generate_commit_message returns the correct commit message."""
+    """Test generate_commit_message returns the correct commit message."""
     mock_client_instance = mocker.MagicMock()
     mock_response_instance = mocker.MagicMock()
     mock_response_instance.text = "feat: new feature"

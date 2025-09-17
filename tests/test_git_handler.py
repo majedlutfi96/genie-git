@@ -6,7 +6,7 @@ from genie_git.git_handler import get_log, get_repository_changes
 
 
 def test_get_log(mocker: MockerFixture) -> None:
-    """Tests get_log returns the correct log."""
+    """Test get_log returns the correct log."""
     mock_repo_instance = mocker.MagicMock()
     mock_repo_instance.git.log.return_value = "test_log"
 
@@ -17,7 +17,7 @@ def test_get_log(mocker: MockerFixture) -> None:
 
 
 def test_get_repository_changes_with_no_exclusions(mocker: MockerFixture) -> None:
-    """Tests get_repository_changes calls 'git diff' correctly with no exclusions."""
+    """Test get_repository_changes calls 'git diff' correctly with no exclusions."""
     mock_repo_instance = mocker.MagicMock()
     mocker.patch("genie_git.git_handler.git.Repo", return_value=mock_repo_instance)
 
@@ -27,7 +27,7 @@ def test_get_repository_changes_with_no_exclusions(mocker: MockerFixture) -> Non
 
 
 def test_get_repository_changes_with_exclusions(mocker: MockerFixture) -> None:
-    """Tests get_repository_changes calls 'git diff' correctly with exclusions."""
+    """Test get_repository_changes calls 'git diff' correctly with exclusions."""
     mock_repo_instance = mocker.MagicMock()
     mocker.patch("genie_git.git_handler.git.Repo", return_value=mock_repo_instance)
 
