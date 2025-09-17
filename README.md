@@ -1,6 +1,6 @@
 # genie-git
 
-[![codecov](https://codecov.io/github/majedlutfi96/genie-git/graph/badge.svg?token=SU461946FV)](https://codecov.io/github/majedlutfi96/genie-git)
+[![codecov](https://codecov.io/gh/majedlutfi96/genie-git/branch/develop/graph/badge.svg?token=SU461946FV)](https://codecov.io/gh/majedlutfi96/genie-git)
 
 An AI-powered CLI tool to suggest conventional commit messages for your staged files.
 
