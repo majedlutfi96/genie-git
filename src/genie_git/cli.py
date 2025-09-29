@@ -12,6 +12,11 @@ def create_parser() -> ArgumentParser:
         "--context",
         help="Additional context to provide to the AI.",
     )
+    suggest_options_parser.add_argument(
+        "--copy",
+        action="store_true",
+        help="Copy the commit message to the clipboard.",
+    )
 
     parser = ArgumentParser(
         "genie-git",
@@ -59,6 +64,16 @@ def create_parser() -> ArgumentParser:
         "--show",
         action="store_true",
         help="Show the current config.",
+    )
+    parser_configure.add_argument(
+        "--always-copy",
+        action="store_true",
+        help="Always copy the commit message to the clipboard.",
+    )
+    parser_configure.add_argument(
+        "--always-copy-off",
+        action="store_true",
+        help="Disable always copy the commit message to the clipboard.",
     )
     parser_configure.set_defaults(func=handle_configure)
 

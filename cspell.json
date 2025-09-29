@@ -25,6 +25,7 @@
     "pyproject",
     "aistudio",
     "apikey",
-    "pytest"
+    "pytest",
+    "pyperclip"
   ]
 }

@@ -3,6 +3,8 @@
 from argparse import Namespace
 from pathlib import Path
 
+import pyperclip
+
 from .ai_handler import suggest_commit_message
 from .config import Config
 from .git_handler import get_log, get_repository_changes
@@ -19,6 +21,13 @@ def handle_configure(args: Namespace) -> None:
     if args.message_specifications:
         config.message_specifications = args.message_specifications
 
+    # Check if both --always-copy and --always-copy-off are provided
+    if args.always_copy and args.always_copy_off:
+        raise ValueError("--always-copy and --always-copy-off cannot be used together.")
+    if args.always_copy:
+        config.always_copy = True
+    if args.always_copy_off:
+        config.always_copy = False
     if args.show:
         config.show()
 
@@ -58,4 +67,6 @@ def handle_suggest(args: Namespace) -> None:
         message_specifications=config.message_specifications,
         context=context,
     )
+    if config.always_copy or args.copy:
+        pyperclip.copy(message)
     print(message)
