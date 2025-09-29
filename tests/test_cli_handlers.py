@@ -57,7 +57,7 @@ def test_handle_suggest(mock_config_instance: MagicMock, mocker: MockerFixture) 
         "genie_git.cli_handlers.suggest_commit_message", return_value="test_message"
     )
 
-    handle_suggest(Namespace())
+    handle_suggest(Namespace(context="test_context"))
 
     mock_get_repository_changes.assert_called_once_with(
         mock_config_instance.exclude_files
@@ -70,6 +70,7 @@ def test_handle_suggest(mock_config_instance: MagicMock, mocker: MockerFixture) 
         git_logs="test_log",
         staged_changes="test_changes",
         message_specifications=mock_config_instance.message_specifications,
+        context="test_context",
     )
 
 
