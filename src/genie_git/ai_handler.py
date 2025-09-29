@@ -9,6 +9,7 @@ def suggest_commit_message(
     git_logs: str,
     staged_changes: str,
     message_specifications: str = "concise and clear",
+    context: str = "",
 ) -> str:
     """Suggests a commit message based on the changes in the repository.
 
@@ -17,6 +18,7 @@ def suggest_commit_message(
         git_logs: The git logs to use as a reference.
         staged_changes: The staged changes to use as a reference.
         message_specifications: Additional specifications for the commit message.
+        context: Additional context for the commit message.
 
     Returns:
         The suggested commit message.
@@ -32,6 +34,8 @@ def suggest_commit_message(
     {git_logs}
     and the following changes:
     {staged_changes}
+
+    {f"Additional context: {context}" if context else ""}
     suggest a {message_specifications} commit message.
     ensure that you follow conventional commit message structure.
     """

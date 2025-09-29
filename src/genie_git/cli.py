@@ -7,11 +7,17 @@ from .cli_handlers import handle_configure, handle_exclude_files, handle_suggest
 
 def create_parser() -> ArgumentParser:
     """Create the argument parser."""
+    suggest_options_parser = ArgumentParser(add_help=False)
+    suggest_options_parser.add_argument(
+        "--context",
+        help="Additional context to provide to the AI.",
+    )
+
     parser = ArgumentParser(
         "genie-git",
         description="An AI-powered tool to suggest conventional git commit messages.",
+        parents=[suggest_options_parser],
     )
-
     parser.set_defaults(func=handle_suggest)
 
     subparsers = parser.add_subparsers(dest="command")
@@ -19,6 +25,7 @@ def create_parser() -> ArgumentParser:
     parser_suggest = subparsers.add_parser(
         "suggest",
         help="Suggests a commit message based on the changes in the repository.",
+        parents=[suggest_options_parser],
     )
     parser_suggest.set_defaults(func=handle_suggest)
 
