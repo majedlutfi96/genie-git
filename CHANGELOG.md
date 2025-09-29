@@ -12,10 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive unit test suite for all modules using `pytest`
 - Continuous Integration (CI) pipeline using GitHub Actions to automatically lint and test code
 - Test coverage reporting with Codecov
+- Add context option for AI commit message suggestions
 
 ### Changed
 
 - Refactored the CLI and main application logic into separate, more maintainable modules
+
+### Fixed
+
+- Handle empty git repositories gracefully
 
 ## [0.1.1] - 2025-09-16
 
