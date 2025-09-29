@@ -38,10 +38,12 @@ def handle_exclude_files(args: Namespace) -> None:
     config.save()
 
 
-def handle_suggest(_args: Namespace) -> None:
+def handle_suggest(args: Namespace) -> None:
     """Suggests a commit message based on the changes in the repository."""
     config = Config.load()
     staged_changes = get_repository_changes(config.exclude_files)
+
+    context = args.context or ""
 
     if not staged_changes:
         print("No staged changes found in the repository.")
@@ -54,5 +56,6 @@ def handle_suggest(_args: Namespace) -> None:
         git_logs=git_logs,
         staged_changes=staged_changes,
         message_specifications=config.message_specifications,
+        context=context,
     )
     print(message)

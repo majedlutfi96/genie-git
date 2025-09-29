@@ -17,12 +17,14 @@ def test_generate_commit_message(mocker: MockerFixture) -> None:
     git_logs = "test_logs"
     staged_changes = "test_changes"
     message_specifications = "concise and clear"
+    context = "test_context"
 
     response_text = suggest_commit_message(
         api_key,
         git_logs,
         staged_changes,
         message_specifications,
+        context,
     )
 
     # To assure that the AI prompt includes the needed information
@@ -34,6 +36,7 @@ def test_generate_commit_message(mocker: MockerFixture) -> None:
     assert git_logs in prompt
     assert staged_changes in prompt
     assert message_specifications in prompt
+    assert context in prompt
 
     # To assure that the API key is used
     assert mock_client_instance.is_called_with(api_key=api_key)
