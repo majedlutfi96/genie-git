@@ -36,4 +36,8 @@ def get_log(number_of_commits: int = 5) -> str:
 
     """
     repo = git.Repo(".", search_parent_directories=True)
-    return repo.git.log(f"-{number_of_commits}", "--pretty=format:%s")
+
+    try:
+        return repo.git.log(f"-{number_of_commits}", "--pretty=format:%s")
+    except git.GitCommandError:  # If there are no commits
+        return ""

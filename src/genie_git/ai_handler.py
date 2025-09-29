@@ -26,7 +26,9 @@ def suggest_commit_message(
         api_key=api_key,
     )
 
-    prompt = f"""Given the following git log:
+    prompt = f"""{
+        "Given the following git log:" if git_logs else "Given this new git repo:"
+    }
     {git_logs}
     and the following changes:
     {staged_changes}
