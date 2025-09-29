@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Continuous Integration (CI) pipeline using GitHub Actions to automatically lint and test code
 - Test coverage reporting with Codecov
 - Add context option for AI commit message suggestions
+- Add `--copy` flag to copy commit messages to clipboard
+- Add `--always-copy` and `--always-copy-off` configuration options for automatic clipboard copying
 
 ### Changed
 
