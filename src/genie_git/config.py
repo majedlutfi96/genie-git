@@ -19,6 +19,7 @@ class Config:
     number_of_commits: int = (
         5  # The number of commits to include in the AI prompt as a reference.
     )
+    always_copy: bool = False
 
     def save(self) -> None:
         """Save the configurations to a JSON file."""
