@@ -43,10 +43,8 @@ def handle_suggest(args: Namespace) -> None:
     config = Config.load()
     staged_changes = get_repository_changes(config.exclude_files)
 
-    if args.context:
-        context = args.context
-    else:
-        context = ""
+    context = args.context or ""
+
     if not staged_changes:
         print("No staged changes found in the repository.")
         return
