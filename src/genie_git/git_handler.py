@@ -39,5 +39,7 @@ def get_log(number_of_commits: int = 5) -> str:
 
     try:
         return repo.git.log(f"-{number_of_commits}", "--pretty=format:%s")
-    except git.GitCommandError:  # If there are no commits
-        return ""
+    except git.GitCommandError as e:  # If there are no commits
+        if "does not have any commits yet" in str(e):
+            return ""
+        raise
